@@ -76,20 +76,25 @@ class Storage(BaseStorage):
         """
         raise NotImplementedError
 
-    def dir(self, bucket: str):
+    def dir(self, bucket: str=None):
         """ list the objects in a bucket """
         # TODO: add kwargs , **kwargs
+        if not bucket:
+            bucket = self.bucket
         file_list = {}
         files = self._s3client.list_objects(Bucket=bucket)
         while files:
-            for filedata in files.get('Contents'):
-                file_list[filedata.get('Key')] = {
-                    'size' : filedata.get('Size'),
-                }
-            if files.get('IsTruncated'):
-                logger.debug(f"Querying bucket... NextMarker: {files.get('NextMarker')}")
-                logger.debug(files)
-                files = self._s3client.list_objects(Bucket=bucket, Marker=files.get('NextMarker'))
+            if files.get('Contents'):
+                for filedata in files.get('Contents'):
+                    file_list[filedata.get('Key')] = {
+                        'size' : filedata.get('Size'),
+                    }
+                if files.get('IsTruncated'):
+                    logger.debug(f"Querying bucket... NextMarker: {files.get('NextMarker')}")
+                    logger.debug(files)
+                    files = self._s3client.list_objects(Bucket=bucket, Marker=files.get('NextMarker'))
+                else:
+                    break
             else:
                 break
         return file_list

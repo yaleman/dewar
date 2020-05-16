@@ -1,5 +1,6 @@
 """ frontend thing """
-from flask import Flask, render_template
+from loguru import logger
+from flask import Flask, render_template, current_app
 
 frontend = Flask(__name__)
 
@@ -9,4 +10,24 @@ def index():
 
 @frontend.route('/incoming')
 def incoming():
-    return render_template('incoming.html', title="Incoming")
+    """ incoming parser """
+    dewar = current_app.config.get('dewar')
+    file_list = dewar.get_incoming_files()
+    return render_template('incoming.html', 
+                           title="Incoming",
+                           knowngood=file_list.get('knowngood'),
+                           other=file_list.get('other'),
+                           )
+
+@frontend.route('/incoming/process/<bucket>/<filename>')
+def process_file(bucket, filename):
+    """ process a file """
+    dewar = current_app.config.get('dewar')
+    ingestor = dewar.ingestor
+
+    return render_template('process_file.html', 
+                           title="Processing file...",
+                           filename=f"{bucket}/{filename}"
+                           #knowngood=file_list.get('knowngood'),
+                           #other=file_list.get('other'),
+                           )

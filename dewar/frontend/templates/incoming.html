@@ -1,5 +1,49 @@
 {% extends "basetemplate.html" %}
 
+{% block button_toolbar %}
+<div class="btn-toolbar mb-2 mb-md-0">
+  <div class="btn-group mr-2">
+  <a href='/incoming/processall'>
+    <button class="btn btn-success" type="button">Process all...</button>
+  </a>
+</div>
+</div>
+{% endblock button_toolbar %}
+
 {% block content %}
-  <p>Incoming things will be here...</p>
+  {% if knowngood or other %}
+  The following files are waiting in the incoming queue:
+  <div class="container">
+    <div class='row'>
+    {% if knowngood %}
+    <div class="col-sm">
+      <h3>"Known good" files</h3>
+      <ul>
+        {% for filename in knowngood %}
+        <li><a href='/incoming/process/incoming_knowngood/{{filename|urlencode}}'>{{filename}}</a></li>
+        {% endfor %}
+        
+      </ul>
+    </div>
+    {% endif %}
+    
+    {% if other %}
+    
+    <div class="col-sm">
+      <h3>"Other" files</h3>
+      <ul>
+        {% for filename in other %}
+        <li><a href='/incoming/process/incoming_other/{{filename|urlencode}}'>{{filename}}</a></li>
+        {% endfor %}
+        
+      </ul>
+    </div>
+    {% endif %}
+    </div>
+  </div>
+  {% else %}
+  There's no files in the incoming buckets!
+  {% endif %}
+
+
 {% endblock %}
