@@ -1,7 +1,7 @@
 """ base class for storage backend """
 
 class DewarStorage():
-    def __init__(self):
+    def __init__(self, metadatastore, bucket, **kwargs):
         pass
 
     def get(self, filehash: str):
@@ -18,7 +18,7 @@ class DewarStorage():
         """ put a file """
         raise NotImplementedError("This is a parent class for a proper implementation")
 
-    def patch(self, filehash: str, contents: bytes = None, metadata: dict = None):
+    def update(self, filehash: str, **kwargs: dict):
         """ update a file or its metadata """
         raise NotImplementedError("This is a parent class for a proper implementation")
 
@@ -28,5 +28,13 @@ class DewarStorage():
 
     def delete(self, filehash: str):
         """ delete a file """
+        raise NotImplementedError("This is a parent class for a proper implementation")
+
+    def search(self, **kwargs: dict):
+        """ search for files by size or type """
+        raise NotImplementedError("This is a parent class for a proper implementation")
+
+    def dir(self, bucket: str):
+        """ list files in a storage bucket """
         raise NotImplementedError("This is a parent class for a proper implementation")
 

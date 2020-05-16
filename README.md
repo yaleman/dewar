@@ -4,10 +4,15 @@ A storage place for samples of all kinds. Typically focused around large-scale c
 
 The basic plan at the moment is to treat each submitted archive as a "job". There's "known good" jobs and "other" jobs. "Known good" job lots would be something like the Wordpress installer, while "other" would be a backup of a compromised/phishing site. There's likely lots of commonality between them, but the interesting parts are the differences.
 
-- three main "elements"
+- here are the main "element types"
   - file
-  - job (a collection of files)
-  - other (ie, processing results)
+    - the file reference is *always* the sha256 hash of the file
+  - job - a collection of files that group together. typically encapsulated in an archive file as you ingest it
+  - bucket - a place where files are stored or ingested from (ie, storage, incoming-knowngood)
+    - This should be a simple string reference, so storage backends can implement the `dir()` function and return a list of files regardless of the method of storage.
+  - other (ie, processing results)?
+
+
 - File metadata should be
   - hash (the unique file ID)
   - size - allows for bucketing when finding similar-sized PHP files for example
@@ -31,13 +36,27 @@ Various bits to build
 2. ingestion pipeline
   - simple single threaded passthru
   - pubsub queue with multiple nodes
-3. raw storage
-  - s3
-  - local filesystem
+3. storage backends
+  - types
+    - s3
+    - local filesystem
+  - methods that storage backends should support (inspired by http verbs)
+    - get (contents and metadata)
+    - put (contents and metadata)
+    - update (update metadata)
+    - head (check a file exists and reutrn metadata, or false if doesn't exist)
+    - delete
+    - search (by metadata, or maybe file contents?)
+    - dir (list contents of a Bucket)
 4. metadata storage
-  - tinydb
-  - postgresql
-  - flat files
+  - types
+    - tinydb
+    - postgresql
+    - flat json files
+  - methods
+    - get (by hash)
+    - put (hash, metadata)
+    - delete (by hash)
 5. processing of samples
   - image normalisation? (phistOfFury?)
   - ssdeep?
