@@ -7,8 +7,6 @@ class MetadataStore():
 
     def get(self, filehash: str):
         """ base implementation """
-        pass
-    
+
     def put(self, filehash: str):
         """ base implementation """
-        pass

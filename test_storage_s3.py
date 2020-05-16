@@ -4,7 +4,7 @@
 
 import os
 from loguru import logger
-from dewar.storage.s3 import S3 as Storage
+from dewar.storage.s3 import Storage
 from dewar.metadata import MetadataStore
 import config
 

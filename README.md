@@ -68,3 +68,8 @@ Various bits to build
   - pubsub multithreaded clustered hilarity
 7. Data interaction
   - website/API for queries or extracting information
+
+
+# Starting a new backend implementation
+
+An example would be a `Storage` backend. The "base" template is `dewar.storage.Storage` and `Storage` backends should always be imported as `from dewar.storage.<backend> import Storage` so they can be consistently used. The S3 implementation then is `from dewar.storage.s3 import Storage`.
