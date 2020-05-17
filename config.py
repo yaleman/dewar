@@ -1,5 +1,6 @@
 """ default config file """
 
+from loguru import logger
 try:
     import config_local
 except ImportError as error:
