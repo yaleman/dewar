@@ -50,6 +50,9 @@ class Storage(BaseStorage):
                                                  )
         except ClientError as client_error:
             logger.error(client_error)
+            if 'InvalidaccessKeyId' in str(client_error):
+                ak_snip = self.aws_access_key_id[:5]
+                logger.error("InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
         # TODO: put some error handling in this
         logger.debug(response)
         return True
@@ -62,7 +65,7 @@ class Storage(BaseStorage):
                                                  )
         except ClientError as client_error:
             logger.error(client_error)
-            if 'InvalidaccessKeyId' in client_error:
+            if 'InvalidaccessKeyId' in str(client_error):
                 ak_snip = self.aws_access_key_id[:5]
                 logger.error("InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
             return False
