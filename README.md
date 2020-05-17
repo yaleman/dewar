@@ -8,6 +8,32 @@ The basic plan at the moment is to treat each submitted archive as a "job". Ther
 
 If you have *any* kind of suggestion or issue, please [create a github issue](https://github.com/yaleman/dewar/issues/new) - I'll gladly discuss it. Pull requests for features or fixes are even better :)
 
+# Usage
+
+Starting the web interface:
+
+```shell
+pipenv install --dev
+pipenv run python -m dewar web
+```
+
+Starting the ingestor (not ... really working yet)
+
+```shell
+pipenv run python -m dewar ingestor
+```
+
+# Configuration
+
+Put local configuration things in `config_local.py`. For example you can set things like your environment variables if you're like me and use weird S3 things.
+
+```python
+import os
+os.environ['AWS_SECRET_KEY_ID'] = "<snip>"
+os.environ['AWS_SECRET_ACCESS_KEY'] = "<snip>"
+os.environ['S3_ENDPOINT_URL'] = 'http://minio.example.internal:9001'
+```
+
 # Internal "element" types
 
   - file
@@ -108,14 +134,3 @@ An example would be a `Storage` backend. The "base" template is `dewar.storage.S
   - put_hash (with metadata)
   - get_metadata (generic)
   - put_metadata (generic types)
-
-# Configuration
-
-Put local configuration things in `config_local.py`. For example you can set things like your environment variables if you're like me and use weird S3 things.
-
-```python
-import os
-os.environ['AWS_SECRET_KEY_ID'] = "<snip>"
-os.environ['AWS_SECRET_ACCESS_KEY'] = "<snip>"
-os.environ['S3_ENDPOINT_URL'] = 'http://minio.example.internal:9001'
-```
