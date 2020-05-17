@@ -1,8 +1,10 @@
 # Dewar
 
+A storage place for samples of all kinds. Typically focused around large-scale collection of phishing kits and other email/website artifacts.
+
 [![Build Status](https://droneio.yaleman.org/api/badges/yaleman/dewar/status.svg)](https://droneio.yaleman.org/yaleman/dewar)
 
-A storage place for samples of all kinds. Typically focused around large-scale collection of phishing kits and other email/website artifacts.
+Test coverage report's in [the latest run of the CI, here](https://droneio.yaleman.org/yaleman/dewar/)
 
 The basic plan at the moment is to treat each submitted archive as a "job". There's "known good" jobs and "other" jobs. "Known good" job lots would be something like the Wordpress installer, while "other" would be a backup of a compromised/phishing site. There's likely lots of commonality between them, but the interesting parts are the differences.
 

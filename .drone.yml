@@ -8,7 +8,7 @@ steps:
   commands:
   - pip install --quiet pipenv
   - pipenv install --dev
-  - pipenv run pytest
+  - pipenv run pytest --cov=dewar
   environment:
     AWS_ACCESS_KEY_ID:
       from_secret: AWS_ACCESS_KEY_ID
@@ -21,4 +21,4 @@ steps:
   commands:
   - pip install --quiet pipenv
   - pipenv install --dev
-  - pipenv run pylint dewar --disable W0511
+  - pipenv run pylint --disable=C0301,W0511 dewar
