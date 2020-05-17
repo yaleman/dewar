@@ -2,6 +2,9 @@ kind: pipeline
 type: docker
 name: dewar
 
+trigger:
+  event:
+    exclude: [ promote ]
 steps:
 - name: pytest
   image: python:3.7
