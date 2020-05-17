@@ -17,8 +17,6 @@ class Ingestor():
         """ ingestor class """
         #self.storage_backend = storage_backend
 
-        self.bucket = bucket
-
         # the number of seconds between running the ingestion loop
         self.loop_delay = kwargs.get('loop_delay', 30)
 
@@ -48,6 +46,8 @@ class Ingestor():
             # TODO: work out how to handle storage backends
             #filename = storage_backend.dir(kwargs.get('bucket'))
             pass
+
+        logger.debug(f"Shutting up pylint for now {filename} {bucket} loop delay {self.loop_delay}")
 
     def ingest_loop(self):
         """ runs an ingest cycle every self.loop_delay seconds """
