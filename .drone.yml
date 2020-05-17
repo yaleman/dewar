@@ -6,7 +6,6 @@ steps:
 - name: testbuild
   image: python:3.7
   commands:
-  - curl -vvvk http://minio.housenet.yaleman.org:3128
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pytest
