@@ -38,9 +38,9 @@ Various bits to build
   - simple single threaded passthru
   - pubsub queue with multiple nodes
 3. storage backends
-  - types
-    - s3
-    - local filesystem
+  - backends
+    - [ ] s3
+    - [ ] local filesystem
   - methods that storage backends should support (inspired by http verbs)
     - get (contents and metadata)
     - put (contents and metadata)
@@ -50,11 +50,11 @@ Various bits to build
     - search (by metadata, or maybe file contents?)
     - dir (list contents of a Bucket)
 4. metadata storage
-  - types
-    - tinydb
-    - postgresql
-    - flat json files
-  - methods
+  - backends
+    - [ ] tinydb
+    - [ ] postgresql
+    - [ ] flat json files ?
+  - methods in the metadata stores
     - get (by hash)
     - put (hash, metadata)
     - delete (by hash)
@@ -68,7 +68,22 @@ Various bits to build
   - single job queue, processing tasks
   - pubsub multithreaded clustered hilarity
 7. Data interaction
-  - website/API for queries or extracting information
+  - [ ] website frontend for .. 
+    - [x] seeing the incoming file bucket contents
+    - [ ] manually processing incoming jobs - in case you want to insert notes as you do it etc
+    - [ ] see the list of historical jobs
+    - [ ] edit job data (typically only notes?)
+    - [ ] upload jobs
+  - [ ] HTTP API
+    - [ ] shoving files into the job buckets
+    - [ ] submitting jobs
+    - [ ] querying job data?
+    - [ ] querying hashes
+      - [ ] have we seen this
+      - [ ] extended - which jobs was this seen in, for correlation
+8. AAA...
+  - [x] is scary bizness
+  - [ ] flask basic http on frontends
 
 
 # Starting a new backend implementation

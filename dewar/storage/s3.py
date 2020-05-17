@@ -14,7 +14,7 @@ class Storage(BaseStorage):
     def __init__(self, **kwargs):
         """ simple s3 backend using boto3 """
         self.endpoint_url = kwargs.get('endpoint_url', os.environ.get('S3_ENDPOINT_URL'))
-        self.aws_access_key_id = kwargs.get('aws_access_key_id', os.environ.get('AWS_SECRET_KEY_ID'))
+        self.aws_access_key_id = kwargs.get('aws_access_key_id', os.environ.get('AWS_ACCESS_KEY_ID'))
         self.aws_secret_access_key = kwargs.get('aws_secret_access_key', os.environ.get('AWS_SECRET_ACCESS_KEY'))
         self.region = kwargs.get('region', 'us-east-1')
 
