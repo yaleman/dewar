@@ -1,0 +1,11 @@
+kind: pipeline
+type: docker
+name: dewar
+
+steps:
+- name: testbuild
+  image: python:3.7
+  commands:
+  - pip install --quiet pipenv
+  - pipenv install --dev
+  - pipenv run pytest

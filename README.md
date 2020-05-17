@@ -15,8 +15,9 @@ The basic plan at the moment is to treat each submitted archive as a "job". Ther
 
 - File metadata should be
   - hash (the unique file ID)
-  - size - allows for bucketing when finding similar-sized PHP files for example
-  - MIME type by say.. unix `file` or another method?
+  - known-good status
+  - size - allows for bucketing when finding similar-sized PHP files for example <+- Decide if this is a thing?
+  - MIME type by say.. unix `file` or another method? <+- maybe? 
 - Job Metadata should include:
   - timestamp (typically when submitted, or when sample was collected)
   - the relative file structure as a tree of filenames and their associated hashes
@@ -73,3 +74,14 @@ Various bits to build
 # Starting a new backend implementation
 
 An example would be a `Storage` backend. The "base" template is `dewar.storage.Storage` and `Storage` backends should always be imported as `from dewar.storage.<backend> import Storage` so they can be consistently used. The S3 implementation then is `from dewar.storage.s3 import Storage`.
+
+# Configuration
+
+Put local configuration things in `config_local.py`. For example you can set things like your environment variables if you're like me and use weird S3 things.
+
+```python
+import os
+os.environ['AWS_SECRET_KEY_ID'] = "<snip>"
+os.environ['AWS_SECRET_ACCESS_KEY'] = "<snip>"
+os.environ['S3_ENDPOINT_URL'] = 'http://minio.example.internal:9001'
+```

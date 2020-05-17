@@ -6,16 +6,7 @@ from loguru import logger
 
 import config
 
-def hash_file(filename):
-    with open(filename, 'rb') as fh:
-        sha_sum = hashlib.sha256()
-        # read a chunk
-        while True:
-            data = fh.read(HASH_BLOCK_SIZE)
-            if not data:
-                break
-            sha_sum.update(data)
-    return sha_sum.hexdigest()
+
 
 
 class Ingestor():

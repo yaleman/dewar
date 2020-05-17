@@ -3,19 +3,21 @@
 """ run some basic tests on the s3 storage thing """
 
 import os
+
 from loguru import logger
-from dewar.storage.s3 import Storage
-from dewar.metadata import MetadataStore
+
 import config
+
+from dewar.metadata import MetadataStore
+from dewar.storage.s3 import Storage
+
+
 
 #config.AWS_SECRET_KEY_ID
 STORAGE = Storage(bucket='test-dewar',
-                  endpoint_url=config.s3_endpoint,
-                  aws_access_key_id=config.AWS_SECRET_KEY_ID,
-                  aws_secret_access_key=config.AWS_SECRET_ACCESS_KEY,
+                  endpoint_url=os.environ.get('S3_ENDPOINT_URL'),
                   metadatastore=MetadataStore,
                   )
-
 
 def test_dir(storage_object=STORAGE):
     """ tests storage.s3.dir """
@@ -44,3 +46,5 @@ def test_delete(storage_object=STORAGE):
     """ tests deleting README.md """
     assert storage_object.delete("README.md")
 
+if __name__ == '__main__':
+    logger.debug(f"Environment variables: {os.environ}")
