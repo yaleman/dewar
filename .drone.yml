@@ -9,3 +9,10 @@ steps:
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pytest
+  environment:
+    AWS_ACCESS_KEY_ID:
+      from_secret: AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY:
+      from_secret: AWS_SECRET_ACCESS_KEY
+    S3_ENDPOINT:
+      from_secret: S3_ENDPOINT
