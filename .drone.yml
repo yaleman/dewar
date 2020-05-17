@@ -6,7 +6,6 @@ steps:
 - name: testbuild
   image: python:3.7
   commands:
-  - sysctl net.ipv6.conf.all.disable_ipv6=0
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pytest
