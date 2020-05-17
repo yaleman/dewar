@@ -6,6 +6,7 @@ The basic plan at the moment is to treat each submitted archive as a "job". Ther
 
 [![Build Status](https://droneio.yaleman.org/api/badges/yaleman/dewar/status.svg)](https://droneio.yaleman.org/yaleman/dewar)
 
+If you have *any* kind of suggestion or issue, please [create a github issue](https://github.com/yaleman/dewar/issues/new) - I'll gladly discuss it. Pull requests for features or fixes are even better :)
 
 # Internal "element" types
 
@@ -45,31 +46,29 @@ Job Metadata
 # Various bits to build
 
 1. ingestion methods:
-  - watch a bucket
+  - [ ] watch a bucket
     1. "known_good" - automatically tagged as good
     2. "other" - `known_good = False`
-  - have a simple API for submitting files, part of the frontend
-2. ingestion pipeline
+  - [ ] have a simple API for submitting files, part of the frontend
+2. ingestion pipelines
   [ ] simple single threaded widget
   [ ] pubsub queue with multiple nodes doing things
 3. storage backends
-  - backends
     - [ ] s3
     - [ ] local filesystem
-4. metadata storage
-  - backends
+4. metadata backends
     - [ ] tinydb
     - [ ] postgresql ? (not on my )
     - [ ] other?
 5. processing of samples
-  - image normalisation? (phistOfFury?)
-  - ssdeep?
-  - hilariously simple tokenization
-  - extraction of IOCs like urls, emails, IP addresses etc.
-  - words/phrases etc
+  - [ ] extraction of IOCs like urls, emails, IP addresses etc.
+  - [ ] hilariously simple tokenization
+  - [ ] image normalisation? (phistOfFury?)
+  - [ ] ssdeep?
+  - [ ] words/phrases etc
 6. processing pipelines
-  - single job queue, processing tasks
-  - pubsub multithreaded clustered hilarity
+  - [ ] single job queue, processing tasks
+  - [ ] pubsub multithreaded clustered hilarity
 7. Data interaction
   - [ ] website frontend for .. 
     - [x] seeing the incoming file bucket contents
