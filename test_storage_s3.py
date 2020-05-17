@@ -11,21 +11,14 @@ import config
 from dewar.metadata import MetadataStore
 from dewar.storage.s3 import Storage
 
-
+TESTBUCKET = 'test-dewar'
 
 #config.AWS_SECRET_KEY_ID
-STORAGE = Storage(bucket='test-dewar',
+STORAGE = Storage(bucket=TESTBUCKET,
                   endpoint_url=os.environ.get('S3_ENDPOINT_URL'),
                   metadatastore=MetadataStore,
                   )
 
-def test_dir(storage_object=STORAGE):
-    """ tests storage.s3.dir """
-    logger.info("This should return a list of files...")
-    files = storage_object.dir('dewar-incoming-knowngood')
-    for filename in files:
-        logger.debug(f"{filename} {files[filename]}")
-    assert files
 
 def test_put(storage_object=STORAGE):
     """ tests putting README.md into the test bucket """
@@ -34,6 +27,15 @@ def test_put(storage_object=STORAGE):
                                   contents=filehandle.read(),
                                   metadata={},
                                   )
+
+
+def test_dir(storage_object=STORAGE):
+    """ tests storage.s3.dir """
+    logger.info("This should return a list of files...")
+    files = storage_object.dir()
+    for filename in files:
+        logger.debug(f"{filename} {files[filename]}")
+    assert files
 
 def test_get(storage_object=STORAGE):
     """ tests getting README.md back """
