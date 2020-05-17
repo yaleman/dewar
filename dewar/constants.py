@@ -10,7 +10,7 @@ METADATA_TYPES = {
         'guid' : str, # a uuid.uuid4()
         'timestamp' : int,  # unix seconds since epoch
         'name' : str, # filename of the archive ingested
-        'notes' : str, 
+        'notes' : str,
         'known_good' : bool, # if the whole job was tagged known-good
     },
     'job-file' : { # files within a job

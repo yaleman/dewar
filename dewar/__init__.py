@@ -6,8 +6,8 @@ class Dewar():
     """ app class """
     def __init__(self, **kwargs):
         self.storage_backend = kwargs.get('storage_backend')
-        self.storage_incoming_other=kwargs['storage_incoming_other']
-        self.storage_incoming_knowngood=kwargs['storage_incoming_knowngood']
+        self.storage_incoming_other = kwargs['storage_incoming_other']
+        self.storage_incoming_knowngood = kwargs['storage_incoming_knowngood']
         self.frontend = kwargs.get('frontend')
         self.ingestor = kwargs.get('Ingestor')
 

@@ -6,6 +6,7 @@ frontend = Flask(__name__)
 
 @frontend.route('/')
 def index():
+    """ dashboard/home page """
     return render_template('index.html', title="Dashboard")
 
 @frontend.route('/incoming')
@@ -13,7 +14,7 @@ def incoming():
     """ incoming parser """
     dewar = current_app.config.get('dewar')
     file_list = dewar.get_incoming_files()
-    return render_template('incoming.html', 
+    return render_template('incoming.html',
                            title="Incoming",
                            knowngood=file_list.get('knowngood'),
                            other=file_list.get('other'),
@@ -22,12 +23,9 @@ def incoming():
 @frontend.route('/incoming/process/<bucket>/<filename>')
 def process_file(bucket, filename):
     """ process a file """
-    dewar = current_app.config.get('dewar')
-    ingestor = dewar.ingestor
+    #dewar = current_app.config.get('dewar')
 
-    return render_template('process_file.html', 
+    return render_template('process_file.html',
                            title="Processing file...",
                            filename=f"{bucket}/{filename}"
-                           #knowngood=file_list.get('knowngood'),
-                           #other=file_list.get('other'),
                            )

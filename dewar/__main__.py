@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" command line interface """
 
 from loguru import logger
 import click
@@ -7,13 +8,13 @@ from dewar import Dewar
 
 import config
 
-app = Dewar(storage_backend=config.storage,
-            storage_incoming_other=config.incoming_other,
-            storage_incoming_knowngood=config.incoming_knowngood,
-            ingestor=config.Ingestor,
-            )
+APPLICATION = Dewar(storage_backend=config.storage,
+                    storage_incoming_other=config.incoming_other,
+                    storage_incoming_knowngood=config.incoming_knowngood,
+                    ingestor=config.Ingestor,
+                    )
 
-config.frontend.config.update(dewar=app)
+config.frontend.config.update(dewar=APPLICATION)
 
 @click.command()
 def web():
@@ -32,7 +33,6 @@ def ingestor(single):
 @click.group()
 def cli():
     """ placeholder for the cli, based on the `click` quickstart """
-    pass
 
 cli.add_command(web)
 cli.add_command(ingestor)
