@@ -3,7 +3,7 @@ type: docker
 name: dewar
 
 steps:
-- name: testbuild
+- name: pytest
   image: python:3.7
   commands:
   - pip install --quiet pipenv
@@ -16,3 +16,9 @@ steps:
       from_secret: AWS_SECRET_ACCESS_KEY
     S3_ENDPOINT_URL:
       from_secret: S3_ENDPOINT_URL
+- name: pylint
+  image: python:3.7
+  commands:
+  - pip install --quiet pipenv
+  - pipenv install --dev
+  - pipenv run pylint dewar --disable W0511
