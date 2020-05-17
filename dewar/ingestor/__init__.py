@@ -11,7 +11,6 @@ from dewar.utilities import hash_file
 class Ingestor():
     """ ingestor class """
     def __init__(self,
-                 bucket: str,
                  **kwargs,
                  ):
         """ ingestor class """
