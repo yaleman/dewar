@@ -2,3 +2,4 @@
 .vscode/*
 config_local.py
 .coverage
+dewar.json

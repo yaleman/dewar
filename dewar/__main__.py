@@ -27,8 +27,10 @@ def ingestor(single):
     """ runs the ingestor """
     if single:
         logger.debug("CLI Ingestor Single-run mode")
+        APPLICATION.ingestor.ingest()
     else:
         logger.debug("Ingestor funloops")
+        APPLICATION.ingestor.ingest_loop()
 
 @click.group()
 def cli():

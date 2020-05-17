@@ -60,10 +60,10 @@ class Storage(BaseStorage):
         logger.debug(response)
         return True
 
-    def get(self, filehash: str):
+    def get(self, filehash: str, **kwargs):
         """ gets the file, returns a dict of the file contents and metadata """
         try:
-            filedata = self._s3client.get_object(Bucket=self.bucket,
+            filedata = self._s3client.get_object(Bucket=kwargs.get('bucket', self.bucket),
                                                  Key=filehash,
                                                  )
         except ClientError as client_error:
@@ -76,7 +76,9 @@ class Storage(BaseStorage):
         if not filedata.get('ContentLength'):
             return False
         return {
-            'content' : filedata.get('Body'),
+            # if I could make content a proper file object I'd do it, but ... download_fileobj
+            # seems weird, and returning it as one of them, even weirder and more prone to breaking?
+            'content' : filedata.get('Body').read(),
             'size' : filedata.get('ContentLength'),
         }
 

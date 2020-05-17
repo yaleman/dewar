@@ -7,8 +7,10 @@ except ImportError as error:
     logger.info(f"Import Error importing local config: {error}")
 
 from dewar.frontend import frontend
-import dewar.ingestor
-from dewar.metadata import MetadataStore
+import dewar.ingestor.basic
+import dewar.metadata 
+
+
 from dewar.storage.s3 import Storage
 import os
 
@@ -18,6 +20,7 @@ buckets = {
     'incoming-other' : 'dewar-incoming-other',
 }
 
+MetadataStore = dewar.metadata.MetadataStore(filename='dewar.json')
 
 
 storage = Storage(bucket=buckets['storage'],
@@ -35,8 +38,10 @@ incoming_other = Storage(bucket=buckets['incoming-other'],
                          metadatastore=MetadataStore,
                          )
 
-Ingestor = dewar.ingestor.Ingestor
+Ingestor = dewar.ingestor.basic.Ingestor()
 
 Ingestor.storage = storage
-Ingestor.incoming_knowngood = incoming_knowngood
-Ingestor.incoming_other = incoming_other
+Ingestor.incoming = {
+   'known_good': incoming_knowngood,
+   'other' : incoming_other,
+}

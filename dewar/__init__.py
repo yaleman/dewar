@@ -9,7 +9,7 @@ class Dewar():
         self.storage_incoming_other = kwargs['storage_incoming_other']
         self.storage_incoming_knowngood = kwargs['storage_incoming_knowngood']
         self.frontend = kwargs.get('frontend')
-        self.ingestor = kwargs.get('Ingestor')
+        self.ingestor = kwargs.get('ingestor')
 
     def __str__(self):
         return "Dewar as a string"
