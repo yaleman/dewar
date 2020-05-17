@@ -4,6 +4,8 @@ import os
 
 import boto3
 from botocore.errorfactory import ClientError
+from botocore.utils import fix_s3_host
+
 from loguru import logger
 
 from . import Storage as BaseStorage
@@ -24,6 +26,9 @@ class Storage(BaseStorage):
                                       aws_secret_access_key=self.aws_secret_access_key,
                                       region_name=self.region,
                                       )
+        # sometimes boto3 tries to be a smartass
+        self._s3client.meta.events.unregister('before-sign.s3', fix_s3_host)
+                            
         super().__init__(**kwargs)
 
     def delete(self, filehash: str, **kwargs):

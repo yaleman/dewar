@@ -4,7 +4,7 @@ from loguru import logger
 try:
     import config_local
 except ImportError as error:
-    logger.warning(f"Import Error importing local config: {error}")
+    logger.info(f"Import Error importing local config: {error}")
 
 from dewar.frontend import frontend
 import dewar.ingestor
