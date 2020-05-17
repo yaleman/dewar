@@ -6,11 +6,9 @@ steps:
 - name: testbuild
   image: python:3.7
   commands:
+  - curl -vvvk http://minio.housenet.yaleman.org:3128
   - pip install --quiet pipenv
   - pipenv install --dev
-  - echo "ENVIRONMENT!"
-  - export
-  - echo "DONE ENVIRONMENT"
   - pipenv run pytest
   environment:
     AWS_ACCESS_KEY_ID:

@@ -26,8 +26,6 @@ class Storage(BaseStorage):
                                       aws_secret_access_key=self.aws_secret_access_key,
                                       region_name=self.region,
                                       )
-        # sometimes boto3 tries to be a smartass
-        self._s3client.meta.events.unregister('before-sign.s3', fix_s3_host)
                             
         super().__init__(**kwargs)
 
