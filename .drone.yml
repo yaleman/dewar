@@ -8,6 +8,9 @@ steps:
   commands:
   - pip install --quiet pipenv
   - pipenv install --dev
+  - echo "ENVIRONMENT!"
+  - export
+  - echo "DONE ENVIRONMENT"
   - pipenv run pytest
   environment:
     AWS_ACCESS_KEY_ID:
