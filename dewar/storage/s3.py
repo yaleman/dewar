@@ -4,7 +4,6 @@ import os
 
 import boto3
 from botocore.errorfactory import ClientError
-from botocore.utils import fix_s3_host
 
 from loguru import logger
 
@@ -26,7 +25,7 @@ class Storage(BaseStorage):
                                       aws_secret_access_key=self.aws_secret_access_key,
                                       region_name=self.region,
                                       )
-                            
+
         super().__init__(**kwargs)
 
     def delete(self, filehash: str, **kwargs):
@@ -54,7 +53,7 @@ class Storage(BaseStorage):
         except ClientError as client_error:
             if 'InvalidaccessKeyId' in str(client_error):
                 ak_snip = self.aws_access_key_id[:5]
-                logger.error("InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
+                logger.error(f"InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
             else:
                 logger.error(client_error)
         # TODO: put some error handling in this
@@ -70,7 +69,7 @@ class Storage(BaseStorage):
         except ClientError as client_error:
             if 'InvalidaccessKeyId' in str(client_error):
                 ak_snip = self.aws_access_key_id[:5]
-                logger.error("InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
+                logger.error(f"InvalidaccessKeyId: Access Key supplied started with: {ak_snip}")
             else:
                 logger.error(client_error)
             return False
@@ -88,7 +87,7 @@ class Storage(BaseStorage):
         """
         raise NotImplementedError
 
-    def dir(self, bucket: str=None):
+    def dir(self, bucket: str = None):
         """ list the objects in a bucket """
         # TODO: add kwargs , **kwargs
         if not bucket:
