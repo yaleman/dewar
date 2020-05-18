@@ -45,17 +45,17 @@ def test_get_hash(connection_string):
         'filetype' : None,
     }
 
-# def test_put_jobmeta(connection_string):
-#     """ tests inserting job metadata """
-#     store = MetadataStore(connection_string=connection_string)
+def test_put_jobmeta(connection_string):
+    """ tests inserting job metadata """
+    store = MetadataStore(connection_string=connection_string)
 
-#     assert store.put_metadata(metadata_type='job', **TEST_JOB_METADATA)
+    assert store.put_metadata(metadata_type='job', **TEST_JOB_METADATA)
 
-# def test_get_jobmeta(connection_string):
-#     """ tests pulling back the job metadata inserted in test_put_jobmeta """
-#     store = MetadataStore(connection_string=connection_string)
-#     result = store.get_metadata(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
-#     assert result == [TEST_JOB_METADATA]
+def test_get_jobmeta(connection_string):
+    """ tests pulling back the job metadata inserted in test_put_jobmeta """
+    store = MetadataStore(connection_string=connection_string)
+    result = store.get_metadata(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
+    assert result == [TEST_JOB_METADATA]
 
 
 # def test_put_othermeta(connection_string):

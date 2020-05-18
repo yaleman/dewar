@@ -63,7 +63,16 @@ class MetadataStore():
     def put_metadata(self, metadata_type, **kwargs):
         """ generic metadata inserter - only required thing is type
             to delineate from other fields - as it is the table name """
-        raise NotImplementedError("This is the shell")
+        if metadata_type == 'job':
+            newobject = Job(**kwargs)
+        elif metadata_type == 'jobfile':
+            newobject = JobFile(**kwargs)
+            # TODO: test jobfile in test_metadata_sqlalchemy_sqlite.py:put_metadata
+        else:
+            raise ValueError(f"Can't handle metadata_type {metadata_type} right now")
+        self.session.add(newobject) #pylint: disable=no-member
+        self.session.commit() #pylint: disable=no-member
+        return True
 
     def get_metadata(self, metadata_type, **kwargs):
         """ generic metadata getter
@@ -71,6 +80,19 @@ class MetadataStore():
 
             kwargs should be search terms, beware this is likely a terrible implementation
             """
-        raise NotImplementedError("This is the shell")
-
+        if metadata_type =='job':
+            result = self.session.query(Job).filter_by(**kwargs)
+        elif metadata_type =='jobfile':
+            result = self.session.query(JobFile).filter_by(**kwargs)
+            # TODO: test jobfile in test_metadata_sqlalchemy_sqlite.py:get_metadata
+        else:
+            raise ValueError(f"Can't handle metadata_type {metadata_type} right now")
+        if not result:
+            return False
+        logger.debug(result)
+        data = [ row.__dict__ for row in result.all() ]
+        for row in data:
+            if row.get('_sa_instance_state'):
+                del row['_sa_instance_state']
+        return data
     # TODO: dewar.metadata.del_hash() ?
