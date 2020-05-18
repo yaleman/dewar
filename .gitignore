@@ -3,3 +3,5 @@
 config_local.py
 .coverage
 dewar.json
+.jekyll-cache/
+_site/
