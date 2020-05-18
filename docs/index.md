@@ -16,7 +16,7 @@ If you have *any* kind of suggestion or issue, please [create a github issue](ht
 
 # Table of Contents
 
-- [Configuration](/dewar/configuration/)
+- [Configuration](/dewar/configuration)
 - [Metadata](/dewar/metadata)
 
 # Usage
