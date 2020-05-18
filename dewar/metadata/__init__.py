@@ -1,9 +1,8 @@
 """ base metadata store class """
 
-from tinydb import TinyDB, Query
 from loguru import logger
 
-from ..constants import METADATA_TYPES
+from dewar.constants import METADATA_TYPES
 
 
 

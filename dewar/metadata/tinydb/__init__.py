@@ -5,8 +5,8 @@
 from tinydb import TinyDB, Query
 from loguru import logger
 
-from dewar.metadata import MetadataStore as BaseMetadataStore
-from ..constants import METADATA_TYPES
+from ...constants import METADATA_TYPES
+from .. import MetadataStore as BaseMetadataStore
 
 
 class MetadataStore(BaseMetadataStore):
