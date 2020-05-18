@@ -8,7 +8,7 @@ except ImportError as error:
 
 from dewar.frontend import frontend
 import dewar.ingestor.basic
-import dewar.metadata 
+import dewar.metadata.tinydb
 
 
 from dewar.storage.s3 import Storage
@@ -20,7 +20,7 @@ buckets = {
     'incoming-other' : 'dewar-incoming-other',
 }
 
-MetadataStore = dewar.metadata.MetadataStore(filename='dewar.json')
+MetadataStore = dewar.metadata.tinydb.MetadataStore(filename='dewar.json')
 
 
 storage = Storage(bucket=buckets['storage'],

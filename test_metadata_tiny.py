@@ -5,7 +5,7 @@ import time
 
 import pytest
 
-from dewar.metadata import MetadataStore
+from dewar.metadata.tinydb import MetadataStore
 from dewar.utilities import generate_job_id
 
 TEST_HASH = '49db13a8c10399aa525df992a14788c827e18371205fb086a1e0d262f5b4beba' # sha256 of README.md at some rando point
