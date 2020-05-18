@@ -25,3 +25,5 @@ steps:
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pylint --disable=C0301,W0511 dewar
+  # C0301 - line too long
+  # W0511 - TODO's
