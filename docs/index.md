@@ -1,3 +1,9 @@
+---
+layout: page
+permalink: /
+title: Dewar
+---
+
 # Dewar
 
 A storage place for samples of all kinds. Typically focused around large-scale collection of phishing kits and other email/website artifacts.
