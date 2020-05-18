@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "193a5f1dc05cab47b07460a1403dcb60dac31cf3951f9863f7ecd8e040891b45"
+            "sha256": "ba3ebf1a851070925fb62a18cd6ab715fd9d06fc9eec213b26368df690f9d183"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -198,11 +198,11 @@
         },
         "loguru": {
             "hashes": [
-                "sha256:074b3caa6748452c1e4f2b302093c94b65d5a4c5a4d7743636b4121e06437b0e",
-                "sha256:a6101fd435ac89ba5205a105a26a6ede9e4ddbb4408a6e167852efca47806d11"
+                "sha256:1e0e6ff59be5e22f863d909ca989e34bb14c21b374f6af45281e603d003dbb96",
+                "sha256:4688d9e1f31d70e1ec7ccce5305967bc28f377eb1048d009108c11faebe05bcf"
             ],
             "index": "pypi",
-            "version": "==0.4.1"
+            "version": "==0.5.0"
         },
         "markupsafe": {
             "hashes": [
@@ -308,6 +308,7 @@
                 "sha256:f502ef245c492b391e0e23e94cba030ab91722dcc56963c85bfd7f3441ea2bbe",
                 "sha256:fe01bac7226499aedf472c62fa3b85b2c619365f3f14dd222ffe4f3aa91e5f98"
             ],
+            "index": "pypi",
             "version": "==1.3.17"
         },
         "tinydb": {

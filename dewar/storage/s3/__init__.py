@@ -7,7 +7,7 @@ from botocore.errorfactory import ClientError
 
 from loguru import logger
 
-from . import Storage as BaseStorage
+from .. import Storage as BaseStorage
 
 
 class Storage(BaseStorage):
