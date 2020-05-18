@@ -46,21 +46,7 @@ os.environ['S3_ENDPOINT_URL'] = 'http://minio.example.internal:9001'
 
 # Metadata
 
-File metadata should be
-
-  - hash (the unique file ID)
-  - known-good flag
-  - size - allows for bucketing when finding similar-sized PHP files for example <+- Decide if this is a thing?
-  - MIME type by say.. unix `file` or another method? <+- maybe? 
-
-Job Metadata
-
-  - timestamp (typically when submitted, or when sample was collected)
-  - the relative file structure as a tree of filenames and their associated hashes
-  - the original job name
-  - known good or not
-  - notes
-  - submitter (username/email address)
+[Metadata docs here](https://yaleman.github.io/docs/metadata/)
 
 # Random thoughts
 
