@@ -1,7 +1,8 @@
+---
 layout: page
 title: "Metadata"
 permalink: /metadata/
-
+---
 
 # `File` metadata
 
