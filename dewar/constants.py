@@ -13,10 +13,15 @@ METADATA_TYPES = {
         'notes' : str,
         'known_good' : bool, # if the whole job was tagged known-good
     },
-    'job-file' : { # files within a job
+    'jobfile' : { # files within a job
         'job' : str, # the uuid.uuid4() of the job
         'path' : str, # relative file path within the job
         'filehash' : str, # file['filehash']
     },
     'other' : {},
 }
+
+
+METADATA_FILEHASH_LENGTH = 64
+METADATA_GUID_LENGTH = 36
+METADATA_RELATIVE_PATH_LENGTH = 255
