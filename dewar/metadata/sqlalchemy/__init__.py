@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 
 import config
 from .models import Base, File, Job, JobFile
+from ...constants import METADATA_TYPES
 
 
 class MetadataStore():
@@ -80,18 +81,22 @@ class MetadataStore():
 
             kwargs should be search terms, beware this is likely a terrible implementation
             """
-        if metadata_type =='job':
-            result = self.session.query(Job).filter_by(**kwargs)
-        elif metadata_type =='jobfile':
-            result = self.session.query(JobFile).filter_by(**kwargs)
+        if metadata_type == 'job':
+            result = self.session.query(Job).filter_by(**kwargs) #pylint: disable=no-member
+        elif metadata_type == 'jobfile':
+            result = self.session.query(JobFile).filter_by(**kwargs) #pylint: disable=no-member
             # TODO: test jobfile in test_metadata_sqlalchemy_sqlite.py:get_metadata
         else:
             raise ValueError(f"Can't handle metadata_type {metadata_type} right now")
         if not result:
             return False
         logger.debug(result)
-        data = [ row.__dict__ for row in result.all() ]
+        data = [row.__dict__ for row in result.all()]
         for row in data:
+            if metadata_type != 'other':
+                for col in row:
+                    if col not in METADATA_TYPES[metadata_type]:
+                        logger.debug(f"unexpected column in response from storage: {col}")
             if row.get('_sa_instance_state'):
                 del row['_sa_instance_state']
         return data
