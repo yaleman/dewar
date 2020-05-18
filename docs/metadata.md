@@ -8,10 +8,10 @@ permalink: /metadata/
 
 | field | type | description |
 | --- | --- | --- |
-| hash | string(64) | the unique file ID - a sha256sum of the contents |
-| known-good | boolean | flag |
+| filehash | string(64) | the unique file ID - a sha256sum of the contents |
+| known_good | boolean | flag |
 | size | int | file size - allows for bucketing when finding similar-sized PHP files for example |
-| type | string | MIME type by say.. unix `file` or another method... maybe? | 
+| filetype | string | MIME type by say.. unix `file` or another method... maybe? | 
 
 # `Job` metadata
 
