@@ -13,7 +13,7 @@ If you have *any* kind of suggestion or issue, please [create a github issue](ht
 Starting the web interface:
 
 ```shell
-pipenv install --dev
+pipenv install 
 pipenv run python -m dewar web
 ```
 
