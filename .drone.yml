@@ -31,7 +31,7 @@ steps:
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pylint dewar
-- name: sonarqube:
+- name: sonarqube
   image: newtmitch/sonar-scanner
   secrets:
     - source: SONAR_TOKEN
