@@ -33,4 +33,4 @@ steps:
     - source: SONAR_HOST
       target: SONAR_HOST
   commands:
-    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONARTOKEN
+    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://${SONAR_HOST} -Dsonar.login=${SONARTOKEN}
