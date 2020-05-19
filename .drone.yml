@@ -25,12 +25,6 @@ steps:
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pylint dewar
-- name: pylint
-  image: python:3.7
-  commands:
-  - pip install --quiet pipenv
-  - pipenv install --dev
-  - pipenv run pylint dewar
 - name: sonarqube
   image: newtmitch/sonar-scanner
   secrets:
