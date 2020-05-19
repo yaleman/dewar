@@ -91,13 +91,19 @@ class MetadataStore():
         if not result:
             return False
         logger.debug(result)
-        data = [row.__dict__ for row in result.all()]
-        for row in data:
-            if metadata_type != 'other':
-                for col in row:
-                    if col not in METADATA_TYPES[metadata_type]:
-                        logger.debug(f"unexpected column in response from storage: {col}")
-            if row.get('_sa_instance_state'):
-                del row['_sa_instance_state']
-        return data
+
+
+        return clean_data_cols(metadata_type, result)
     # TODO: dewar.metadata.del_hash() ?
+
+def clean_data_cols(metadata_type, result):
+    """ cleans up or warns about columns in query responses that should not be there """
+    data = [row.__dict__ for row in result.all()]
+    for row in data:
+        if metadata_type != 'other':
+            for col in row:
+                if col not in METADATA_TYPES[metadata_type]:
+                    logger.debug(f"unexpected column in response from storage: {col}")
+        if row.get('_sa_instance_state'):
+            del row['_sa_instance_state']
+    return data
