@@ -41,15 +41,15 @@ class MetadataStore():
             filetype=kwargs.get('filetype', None),
             known_good=kwargs.get('known_good', False),
         )
-        self.session.add(newfile) #pylint: disable=no-member
-        self.session.commit() #pylint: disable=no-member
+        self.session.add(newfile)
+        self.session.commit()
         return True
 
     def get_hash(self, filehash: str):
         """ sqlalchemy implementation
             args: filehash
         """
-        result = self.session.query(File).filter(File.filehash == filehash) #pylint: disable=no-member
+        result = self.session.query(File).filter(File.filehash == filehash)
         if not result:
             return False
         data = result.one()
@@ -71,8 +71,8 @@ class MetadataStore():
             # TODO: test jobfile in test_metadata_sqlalchemy_sqlite.py:put_metadata
         else:
             raise ValueError(f"Can't handle metadata_type {metadata_type} right now")
-        self.session.add(newobject) #pylint: disable=no-member
-        self.session.commit() #pylint: disable=no-member
+        self.session.add(newobject)
+        self.session.commit()
         return True
 
     def get_metadata(self, metadata_type, **kwargs):
@@ -82,9 +82,9 @@ class MetadataStore():
             kwargs should be search terms, beware this is likely a terrible implementation
             """
         if metadata_type == 'job':
-            result = self.session.query(Job).filter_by(**kwargs) #pylint: disable=no-member
+            result = self.session.query(Job).filter_by(**kwargs)
         elif metadata_type == 'jobfile':
-            result = self.session.query(JobFile).filter_by(**kwargs) #pylint: disable=no-member
+            result = self.session.query(JobFile).filter_by(**kwargs)
             # TODO: test jobfile in test_metadata_sqlalchemy_sqlite.py:get_metadata
         else:
             raise ValueError(f"Can't handle metadata_type {metadata_type} right now")
