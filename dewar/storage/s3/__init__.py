@@ -4,11 +4,9 @@ import os
 
 import boto3
 from botocore.errorfactory import ClientError
-
 from loguru import logger
 
 from .. import Storage as BaseStorage
-
 
 class Storage(BaseStorage):
     """ s3 storage backend for dewar """
@@ -25,13 +23,10 @@ class Storage(BaseStorage):
                                       aws_secret_access_key=self.aws_secret_access_key,
                                       region_name=self.region,
                                       )
-
         super().__init__(**kwargs)
 
     def delete(self, filehash: str, **kwargs):
         """ deletes a file from a bucket """
-        #if not bucket:
-        #    bucket = self.bucket
         bucket = kwargs.get('bucket', self.bucket)
         try:
             response = self._s3client.delete_object(Bucket=bucket,
