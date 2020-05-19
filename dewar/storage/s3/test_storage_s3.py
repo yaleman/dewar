@@ -6,14 +6,11 @@ import os
 
 from loguru import logger
 
-import config
-
 from dewar.metadata import MetadataStore
 from dewar.storage.s3 import Storage
 
 TESTBUCKET = 'test-dewar'
 
-#config.AWS_SECRET_KEY_ID
 STORAGE = Storage(bucket=TESTBUCKET,
                   endpoint_url=os.environ.get('S3_ENDPOINT_URL'),
                   metadatastore=MetadataStore,

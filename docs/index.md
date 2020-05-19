@@ -111,5 +111,5 @@ An example would be a `Storage` backend. The "base" template is `dewar.storage.S
 
   - get_hash
   - put_hash (with metadata)
-  - get_metadata (generic)
-  - put_metadata (generic types)
+  - get (generic)
+  - put (generic)

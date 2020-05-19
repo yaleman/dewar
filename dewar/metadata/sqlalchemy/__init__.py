@@ -61,7 +61,7 @@ class MetadataStore():
         }
 
 
-    def put_metadata(self, metadata_type, **kwargs):
+    def put(self, metadata_type, **kwargs):
         """ generic metadata inserter - only required thing is type
             to delineate from other fields - as it is the table name """
         if metadata_type == 'job':
@@ -75,7 +75,7 @@ class MetadataStore():
         self.session.commit()
         return True
 
-    def get_metadata(self, metadata_type, **kwargs):
+    def get(self, metadata_type, **kwargs):
         """ generic metadata getter
             only required thing is metadata_type to delineate from other fields - as it is the table name
 

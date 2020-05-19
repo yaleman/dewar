@@ -1,6 +1,5 @@
 """ terrible tests for the base metadata class """
 
-import os
 import time
 
 import pytest
@@ -15,7 +14,7 @@ TEST_JOB_METADATA = { # ingestion job
         'guid' : generate_job_id(), # a dewar.utilities.get_job_id() is a uuid.uuid4, but ... standard.
         'timestamp' : int(time.time()),  # unix seconds since epoch
         'name' : "2020-05-20-examplefile.tar.gz", # filename of the archive ingested
-        'notes' : "These are some funky notes, don't you know? ÷", 
+        'notes' : "These are some funky notes, don't you know? ÷",
         'known_good' : True, # if the whole job was tagged known-good
     }
 
@@ -27,12 +26,12 @@ def metadata_filename(tmpdir_factory):
     return filename
 
 
-def test_put_hash(metadata_filename):
+def test_put_hash(metadata_filename): # pylint: disable=redefined-outer-name
     """ test putting a hash in """
     store = MetadataStore(filename=metadata_filename)
     assert store.put_hash(filehash=TEST_HASH, known_good=TEST_KG)
 
-def test_get_hash(metadata_filename):
+def test_get_hash(metadata_filename): # pylint: disable=redefined-outer-name
     """ test getting the hash back """
     store = MetadataStore(filename=metadata_filename)
     data = store.get_hash(TEST_HASH)
@@ -41,16 +40,16 @@ def test_get_hash(metadata_filename):
         'known_good' : TEST_KG,
     }
 
-def test_put_jobmeta(metadata_filename):
+def test_put_jobmeta(metadata_filename): # pylint: disable=redefined-outer-name
     """ tests inserting job metadata """
     store = MetadataStore(filename=metadata_filename)
 
-    assert store.put_metadata(metadata_type='job', **TEST_JOB_METADATA)
+    assert store.put(metadata_type='job', **TEST_JOB_METADATA)
 
-def test_get_jobmeta(metadata_filename):
+def test_get_jobmeta(metadata_filename): # pylint: disable=redefined-outer-name
     """ tests pulling back the job metadata inserted in test_put_jobmeta """
     store = MetadataStore(filename=metadata_filename)
-    result = store.get_metadata(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
+    result = store.get(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
     assert result == [TEST_JOB_METADATA]
 
 
@@ -69,4 +68,3 @@ def test_get_jobmeta(metadata_filename):
 # def test_del_othermeta(metadata_filename):
 #     store = MetadataStore(filename=metadata_filename)
 #     assert 1 == 2
-

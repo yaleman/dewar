@@ -50,7 +50,7 @@ class MetadataStore(BaseMetadataStore):
 
         return self.dbtable['file'].insert(filedata)
 
-    def put_metadata(self, metadata_type, **kwargs):
+    def put(self, metadata_type, **kwargs):
         """ generic metadata inserter - only required thing is type
             to delineate from other fields - as it is the table name """
         if metadata_type not in self.dbtable:
@@ -60,7 +60,7 @@ class MetadataStore(BaseMetadataStore):
             table = self.dbtable.get(metadata_type)
         return table.insert(kwargs)
 
-    def get_metadata(self, metadata_type, **kwargs):
+    def get(self, metadata_type, **kwargs):
         """ generic metadata getter
             only required thing is metadata_type to delineate from other fields - as it is the table name
 

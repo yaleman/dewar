@@ -1,7 +1,5 @@
 """ terrible tests for the base metadata class """
 
-import os
-from pathlib import Path
 import time
 from loguru import logger
 import pytest
@@ -16,7 +14,7 @@ TEST_JOB_METADATA = { # ingestion job
         'guid' : generate_job_id(), # a dewar.utilities.get_job_id() is a uuid.uuid4, but ... standard.
         'timestamp' : int(time.time()),  # unix seconds since epoch
         'name' : "2020-05-20-examplefile.tar.gz", # filename of the archive ingested
-        'notes' : "These are some funky notes, don't you know? ÷", 
+        'notes' : "These are some funky notes, don't you know? ÷",
         'known_good' : True, # if the whole job was tagged known-good
     }
 
@@ -27,12 +25,12 @@ def connection_string(tmpdir_factory):
     logger.debug(f"Connection string: 'sqlite:///{filename}'")
     return f'sqlite:///{filename}'
 
-def test_put_hash(connection_string):
+def test_put_hash(connection_string): # pylint: disable=redefined-outer-name
     """ test putting a hash in """
     store = MetadataStore(connection_string=connection_string)
     assert store.put_hash(filehash=TEST_HASH, known_good=TEST_KG, size=123)
 
-def test_get_hash(connection_string):
+def test_get_hash(connection_string): # pylint: disable=redefined-outer-name
     """ test getting the hash back """
     store = MetadataStore(connection_string=connection_string)
     data = store.get_hash(TEST_HASH)
@@ -45,16 +43,16 @@ def test_get_hash(connection_string):
         'filetype' : None,
     }
 
-def test_put_jobmeta(connection_string):
+def test_put_jobmeta(connection_string): # pylint: disable=redefined-outer-name
     """ tests inserting job metadata """
     store = MetadataStore(connection_string=connection_string)
 
-    assert store.put_metadata(metadata_type='job', **TEST_JOB_METADATA)
+    assert store.put(metadata_type='job', **TEST_JOB_METADATA)
 
-def test_get_jobmeta(connection_string):
+def test_get_jobmeta(connection_string): # pylint: disable=redefined-outer-name
     """ tests pulling back the job metadata inserted in test_put_jobmeta """
     store = MetadataStore(connection_string=connection_string)
-    result = store.get_metadata(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
+    result = store.get(metadata_type='job', guid=TEST_JOB_METADATA['guid'])
     assert result == [TEST_JOB_METADATA]
 
 
@@ -73,4 +71,3 @@ def test_get_jobmeta(connection_string):
 # def test_del_othermeta(connection_string):
 #     store = MetadataStore(filename=connection_string)
 #     assert 1 == 2
-

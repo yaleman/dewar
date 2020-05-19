@@ -57,7 +57,7 @@ class Ingestor():
         logger.debug(jobdata)
 
         # TODO: store the job metadata
-        self.metadatastore.put_metadata(metadata_type='job', **jobdata)
+        self.metadatastore.put(metadata_type='job', **jobdata)
         return jobdata
 
     def _find_file_to_ingest(self, **kwargs):
