@@ -2,8 +2,8 @@
 
 from loguru import logger
 
-from dewar.constants import METADATA_TYPES
 
+from dewar.constants import METADATA_TYPES
 
 
 class MetadataStore():
@@ -11,6 +11,14 @@ class MetadataStore():
     def __init__(self, **kwargs):
         pass
 
+    def get_or_insert(self, metadata_type, **kwargs):
+        """ get, and return, or insert and return a given piece of metadata """
+        result = self.get(metadata_type, **kwargs)
+
+        if not result:
+            self.put_metadata(metadata_type, **kwargs)
+            result = self.get(metadata_type, **kwargs)
+        return result
 
     def get_hash(self, filehash: str):
         """ base implementation """

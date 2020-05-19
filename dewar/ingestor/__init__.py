@@ -110,17 +110,33 @@ class Ingestor():
         return bucket, filename
 
     # file-type handlers
-    def _store_dir(self, member, job, **kwargs):
+    def _store_dir(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing metadata for directories """
-        logger.warning(f"_store_link is not actually implemented: {self} {kwargs} {member} {job}")
+        logger.warning(f"_store_link is not actually implemented: {self} {tempdir} {archive} {kwargs} {member} {job}")
 
-    def _store_file(self, member, job, **kwargs):
+    def _store_file(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing files """
-        logger.warning(f"_store_file is not actually implemented: {self} {kwargs} {member} {job}")
+        logger.warning(f"_store_file is not actually implemented: {self} {tempdir} {archive} {kwargs} {member} {job}")
+        filename = f"{tempdir}/{member.name}"
+        filesize = os.stat(filename).st_size
+        filehash = hash_file(filename)
+        logger.debug(f"File size of member in tempdir: {filesize}")
+        logger.debug(f"File hash of {filename}: {filehash}")
+        filedata = {
+            'filehash' : filehash,
+            'size' : filesize,
+            'known_good' : job.known_good,
+        }
 
-    def _store_symlink(self, member, job, **kwargs):
+        logger.debug("checking for existing file hash")
+        hashcheck = self.metadatastore.get_or_insert('file', **filedata)
+        if hashcheck:
+            logger.debug("metadata already stored")
+            logger.debug("storing metadata")
+
+    def _store_symlink(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing metadata for symlink - I'm guessing we shouldn't try to read this as a file? """
-        logger.warning(f"_store_link is not actually implemented: {self} {kwargs} {member} {job}")
+        logger.warning(f"_store_link is not actually implemented: {self} {tempdir} {archive} {kwargs} {member} {job}")
 
     # archive type handlers
     def _extract_tarfile_format(self, job, filehandle, tempdir):
@@ -128,7 +144,6 @@ class Ingestor():
 
         logger.debug("Opening tarfile... we have {tempdir} to work in")
         archive = tarfile.open(mode='r', fileobj=filehandle, bufsize=8192)
-
         # TODO: decide if this is risky or not?
         #logger.debug(archive.extractall(tempdir))
         for member in archive.getmembers():
@@ -143,4 +158,6 @@ class Ingestor():
             else:
                 logger.error(f"We don't have a handler for this... {member}")
             if handler:
-                handler(member, tempdir, job)
+                archive.extract(member, tempdir, set_attrs=False)
+
+                handler(job, tempdir, archive, member)
