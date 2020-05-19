@@ -38,7 +38,5 @@ steps:
       target: SONAR_TOKEN
     - source: SONAR_HOST
       target: SONAR_HOST
-  volumes:
-    - sonar-cache:/root/.sonar/cache
   commands:
     - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONARTOKEN
