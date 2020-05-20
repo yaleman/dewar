@@ -33,5 +33,5 @@ steps:
     SONAR_HOST:
       from_secret: SONAR_HOST
   commands:
-    - echo ${SONAR_HOST}
+    - echo {{SONAR_HOST}}
     - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$${SONAR_HOST} -Dsonar.login=$${SONAR_TOKEN}
