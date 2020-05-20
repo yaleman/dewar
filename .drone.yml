@@ -25,13 +25,24 @@ steps:
   - pip install --quiet pipenv
   - pipenv install --dev
   - pipenv run pylint dewar
+# - name: sonarqube
+#   image: newtmitch/sonar-scanner
+#   commands:
+#     - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONARTOKEN
+#   environment:
+#     SONARTOKEN: 
+#       from_secret: sonartoken
+#     SONAR_HOST:
+#       from_secret: sonar_host
 - name: sonarqube
-  image: newtmitch/sonar-scanner
-  commands:
-    - echo {{SONAR_HOST}}
-    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONARTOKEN
-  environment:
-    SONARTOKEN: 
-      from_secret: sonartoken
-    SONAR_HOST:
+  image: aosapps/drone-sonar-plugin
+  settings:
+    sonar_host:
       from_secret: sonar_host
+    sonar_token:
+      from_secret: sonartoken
+    ver: 1.0
+    timeout: 20
+    sources: .
+    level: DEBUG
+    showProfiling: true
