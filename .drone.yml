@@ -29,9 +29,9 @@ steps:
   image: newtmitch/sonar-scanner
   commands:
     - echo {{SONAR_HOST}}
-    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONAR_TOKEN
+    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONARTOKEN
   environment:
-    SONAR_TOKEN: 
-      from_secret: sonar_token
+    SONARTOKEN: 
+      from_secret: sonartoken
     SONAR_HOST:
       from_secret: sonar_host
