@@ -27,11 +27,11 @@ steps:
   - pipenv run pylint dewar
 - name: sonarqube
   image: newtmitch/sonar-scanner
-  environment:
-    SONAR_TOKEN: 
-      from_secret: SONAR_TOKEN
-    SONAR_HOST:
-      from_secret: SONAR_HOST
   commands:
     - echo {{SONAR_HOST}}
-    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$${SONAR_HOST} -Dsonar.login=$${SONAR_TOKEN}
+    - sonar-scanner -Dsonar.projectKey=dewar -Dsonar.sources=. -Dsonar.host.url=https://$SONAR_HOST -Dsonar.login=$SONAR_TOKEN
+  environment:
+    SONAR_TOKEN: 
+      from_secret: sonar_token
+    SONAR_HOST:
+      from_secret: sonar_host
