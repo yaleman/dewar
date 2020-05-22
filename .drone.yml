@@ -8,9 +8,10 @@ trigger:
 services:
 - name: database
   image: postgres
-  # environment:
-  #   - POSTGRES_USER: postgres
-  #   - POSTGRES_DB: test
+  environment:
+    - "POSTGRES_USER=postgres"
+    - "POSTGRES_DB=test"
+    - "POSTGRES_HOST_AUTH_METHOD=trust"
 steps:
 - name: pytest
   image: python:3.7
