@@ -6,12 +6,17 @@ trigger:
   event:
     exclude: [ promote ]
 services:
-- name: database
+- name: postgres
   image: postgres
   environment:
     POSTGRES_USER: postgres
     POSTGRES_DB: test
     POSTGRES_HOST_AUTH_METHOD: trust
+- name: mysql
+  image: mysql
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    MYSQL_DATABASE: test
 steps:
 - name: pytest
   image: python:3.7

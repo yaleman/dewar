@@ -1,10 +1,9 @@
 """ terrible tests for the base metadata class """
 
-from loguru import logger
 import pytest
+from loguru import logger
 
-
-
+from .sqlalchemy_tests import test_get_hash, test_get_jobmeta, test_put_hash, test_put_jobmeta # pylint: disable=unused-import
 
 @pytest.fixture(scope="session")
 def connection_string(tmpdir_factory):
@@ -13,7 +12,7 @@ def connection_string(tmpdir_factory):
     logger.debug(f"Connection string: 'sqlite:///{filename}'")
     return f'sqlite:///{filename}'
 
-from .sqlalchemy_tests import test_get_hash, test_get_jobmeta, test_put_hash, test_put_jobmeta
+
 
 
 

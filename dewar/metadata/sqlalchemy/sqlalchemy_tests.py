@@ -1,9 +1,8 @@
+""" these are the tests that you integrate into other things """
 
 import time
-import pytest
 
 from loguru import logger
-
 
 from dewar.utilities import generate_job_id
 
