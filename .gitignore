@@ -5,3 +5,5 @@ config_local.py
 dewar.json
 .scannerwork/.sonar_lock
 .scannerwork/report-task.txt
+**/.jekyll-cache/**
+docs/_site/
