@@ -44,3 +44,9 @@ steps:
     sources: .
     level: DEBUG
     showProfiling: true
+services:
+  database:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=test
