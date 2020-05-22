@@ -19,6 +19,12 @@ steps:
       from_secret: AWS_SECRET_ACCESS_KEY
     S3_ENDPOINT_URL:
       from_secret: S3_ENDPOINT_URL
+  services:
+    database:
+      image: postgres
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_DB=test
 - name: pylint
   image: python:3.7
   commands:
@@ -44,9 +50,3 @@ steps:
     sources: .
     level: DEBUG
     showProfiling: true
-services:
-  database:
-    image: postgres
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=test
