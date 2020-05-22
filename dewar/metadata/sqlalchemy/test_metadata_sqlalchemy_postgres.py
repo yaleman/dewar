@@ -25,4 +25,4 @@ def connection_string(tmpdir_factory):
     logger.debug(f"Connection string: '{connection_string}")
     return connection_string
 
-from .test_metadata_sqlalchemy_sqlite import test_get_hash, test_get_jobmeta, test_put_hash, test_put_jobmeta
+from .sqlalchemy_tests import test_get_hash, test_get_jobmeta, test_put_hash, test_put_jobmeta
