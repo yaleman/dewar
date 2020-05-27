@@ -25,12 +25,12 @@ class Storage(BaseStorage):
                                       )
         super().__init__(**kwargs)
 
-    def delete(self, filehash: str, **kwargs):
+    def delete(self, filename: str, **kwargs):
         """ deletes a file from a bucket """
         bucket = kwargs.get('bucket', self.bucket)
         try:
             response = self._s3client.delete_object(Bucket=bucket,
-                                                    Key=filehash,
+                                                    Key=filename,
                                                     )
             logger.debug(response)
         except ClientError as client_error:
@@ -38,12 +38,12 @@ class Storage(BaseStorage):
             return False
         return True
 
-    def put(self, filehash: str, contents: bytes, metadata: dict):
+    def put(self, filename: str, contents: bytes, **kwargs: dict):
         """ store a file """
         try:
             response = self._s3client.put_object(Bucket=self.bucket,
                                                  Body=contents,
-                                                 Key=filehash,
+                                                 Key=filename,
                                                  )
         except ClientError as client_error:
             if 'InvalidaccessKeyId' in str(client_error):
@@ -55,11 +55,11 @@ class Storage(BaseStorage):
         logger.debug(response)
         return True
 
-    def get(self, filehash: str, **kwargs):
+    def get(self, filename: str, **kwargs):
         """ gets the file, returns a dict of the file contents and metadata """
         try:
             filedata = self._s3client.get_object(Bucket=kwargs.get('bucket', self.bucket),
-                                                 Key=filehash,
+                                                 Key=filename,
                                                  )
         except ClientError as client_error:
             if 'InvalidaccessKeyId' in str(client_error):
@@ -84,7 +84,7 @@ class Storage(BaseStorage):
         """
         raise NotImplementedError
 
-    def dir(self, bucket: str = None):
+    def dir(self, bucket: str = None, **kwargs: dict):
         """ list the objects in a bucket """
         # TODO: add kwargs , **kwargs
         if not bucket:

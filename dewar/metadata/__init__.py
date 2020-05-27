@@ -11,7 +11,7 @@ class MetadataStore():
     def __init__(self, **kwargs):
         pass
 
-    def get_or_insert(self, metadata_type, **kwargs):
+    def get_or_insert(self, metadata_type: str, **kwargs):
         """ get, and return, or insert and return a given piece of metadata """
         result = self.get(metadata_type, **kwargs)
 
@@ -28,12 +28,12 @@ class MetadataStore():
         """ base implementation """
         raise NotImplementedError("This is the shell")
 
-    def put(self, metadata_type, **kwargs):
+    def put(self, metadata_type: str, **kwargs):
         """ generic metadata inserter - only required thing is type
             to delineate from other fields - as it is the table name """
         raise NotImplementedError("This is the shell")
 
-    def get(self, metadata_type, **kwargs):
+    def get(self, metadata_type: str, **kwargs):
         """ generic metadata getter
             only required thing is metadata_type to delineate from other fields - as it is the table name
 

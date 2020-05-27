@@ -20,6 +20,8 @@ class Ingestor():
         """ ingestor class """
         #self.storage_backend = storage_backend
         self.metadatastore = config.MetadataStore
+
+        self.storage = config.storage
         # the number of seconds between running the ingestion loop
         self.loop_delay = kwargs.get('loop_delay', 30)
         self.incoming = {}
@@ -112,7 +114,7 @@ class Ingestor():
     # file-type handlers
     def _store_dir(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing metadata for directories """
-        logger.warning(f"_store_link is not actually implemented: {self} {tempdir} {archive} {kwargs} {member} {job}")
+        logger.error(f"_store_dir is not actually implemented: {self} {tempdir} {archive} {kwargs} {member} {job}")
 
     def _store_file(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing files """
@@ -128,11 +130,19 @@ class Ingestor():
             'known_good' : job.known_good,
         }
 
-        logger.debug("checking for existing file hash")
+        logger.debug(f"storing metadata {filedata}")
         hashcheck = self.metadatastore.get_or_insert('file', **filedata)
-        if hashcheck:
-            logger.debug("metadata already stored")
-            logger.debug("storing metadata")
+        logger.debug(f"stored metadata: {hashcheck}")
+
+        if not self.storage.head(filename=filehash):
+            logger.debug(f"storing {filehash}")
+            with open(filename, 'r').read() as filecontents:
+                self.storage.put(filename=filehash,
+                                 contents=filecontents,
+                                 )
+        else:
+            logger.debug(f"{filehash} already exists in storage, not storing")
+        return True
 
     def _store_symlink(self, job, tempdir, archive, member, **kwargs):
         """ this should handle storing metadata for symlink - I'm guessing we shouldn't try to read this as a file? """

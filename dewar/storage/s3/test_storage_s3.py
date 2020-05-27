@@ -9,6 +9,9 @@ from loguru import logger
 from dewar.metadata import MetadataStore
 from dewar.storage.s3 import Storage
 
+# not actually unused - config sets environment variables
+import config #pylint: disable=unused-import
+
 TESTBUCKET = 'test-dewar'
 
 STORAGE = Storage(bucket=TESTBUCKET,
